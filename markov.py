@@ -10,12 +10,47 @@ c = a.num_rows
 b = a.select('brand').where('brand', 'p').num_rows
 b = b / c
 d = 1 - b
-count = 0
-for x in z:
-    i1 = int(z.index(x))
-    i2 = int(i1 + 1)
-    print(i1,i2)
-    if(z[i1] == 'p' and z[i2] == 'p'):
-        print(z[i1], z[i2])
-        count+=1
-        print(count)
+leng = len(z)
+pp, cc , pc, cp = 0, 0, 0, 0
+
+# for PP
+for x in range(0, leng  - 1):
+
+    if(z[x] == 'p' and z[x+1] == 'p'):
+        pp+=1
+pp = pp / c
+print("probability that a person drinks pepsi and will continue to do so: " +str(pp))
+
+# for CC
+for x in range(0, leng  - 1):
+
+    if(z[x] == 'c' and z[x+1] == 'c'):
+        cc+=1
+cc = cc / c
+print("probability that a person drinks cola and will continue to do so: " +str(cc))
+
+# for PC
+for x in range(0, leng  - 1):
+
+    if(z[x] == 'p' and z[x+1] == 'c'):
+        pc+=1
+pc = pc / c
+print("probability that a person drinks pepsi and will shift to cola is: " +str(pc))
+
+# for CP
+for x in range(0, leng  - 1):
+
+    if(z[x] == 'c' and z[x+1] == 'p'):
+        cp+=1
+cp = cp / c
+print("probability that a person drinks cola and will shift to pepsi is: " +str(cp))
+
+ipm = [b, d]
+ipm = np.matrix(ipm)
+r1 = [pp, pc]
+r2 = [cp, cc]
+m = np.matrix((r1, r2))
+
+for x in range(1, 3):
+    ipm = np.dot(ipm, m)
+    print("probability after " +str(x)+ " day is: " + str(ipm))
