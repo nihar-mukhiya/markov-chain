@@ -13,10 +13,11 @@ file = Table.read_table(file_path)
 
 a = Table.read_table(file_path)
 e = pandas.read_csv(file_path, header = 0)
-z = e.brand.tolist()
 c = a.num_rows
 column_names = a.labels
 column = column_names[0]
+z = e[column].tolist()
+#z = e.columns.values.tolist()
 eset = list(set(z))
 print(eset)
 print(column_names)
